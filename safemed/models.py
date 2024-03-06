@@ -12,6 +12,10 @@ class Category(models.Model):
     
     def __str__(self):
         return self.title
+    
+    class Meta:
+        verbose_name = 'Category'
+        verbose_name_plural = 'Categories'
 
 class SubCategory(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
@@ -19,6 +23,9 @@ class SubCategory(models.Model):
 
     def __str__(self):
         return self.title
+    class Meta:
+        verbose_name = 'Sub-Category'
+        verbose_name_plural = 'Sub-Categories'
 
 class Brand(models.Model):
     name = models.CharField(max_length=100)

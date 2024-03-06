@@ -25,6 +25,7 @@ class ProductSerializer(serializers.ModelSerializer):
     class Meta:
         model = Product
         fields = ('id', 'title', 'description', 'category', 'sub_category', 'brand', 'get_image', 'image')
+        # image = serializers.Field('image.url')
 
 class ContactsSerializer(serializers.ModelSerializer):
     class Meta:
