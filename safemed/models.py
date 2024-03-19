@@ -19,7 +19,7 @@ class Category(models.Model):
 
 class SubCategory(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    title = models.CharField(max_length=100)
+    title = models.CharField(max_length=100, blank=True, null=True)
 
     def __str__(self):
         return self.title
@@ -28,7 +28,7 @@ class SubCategory(models.Model):
         verbose_name_plural = 'Sub-Categories'
 
 class Brand(models.Model):
-    name = models.CharField(max_length=100)
+    name = models.CharField(max_length=100, blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -44,10 +44,11 @@ class Product(models.Model):
     def __str__(self):
         return self.title
     
-    def get_image(self):
-        try:
-            return f"http://localhost:8000{self.image.url}"
-        except:
+    @property
+    def image_url(self):
+        if self.image:
+            return self.image.name
+        else:
             return "https://m.media-amazon.com/images/I/21cOE-lrhBL._AC_UF1000,1000_QL80_.jpg"
         
 

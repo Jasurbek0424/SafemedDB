@@ -5,6 +5,7 @@ import os
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 BASE_URL = 'http://localhost:8000'
+IMPORT_EXPORT_USE_TRANSACTIONS = True
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -14,8 +15,8 @@ SECRET_KEY = 'django-insecure-v0ois6-&-oy1zwf5qgu11n7y$r$98v5j2tew@b_-vrj@_3l(c)
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
-ALLOWED_HOSTS = []
+APPEND_SLASH = False
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -34,9 +35,12 @@ INSTALLED_APPS = [
     'import_export',
 ]
 
+CORS_ALLOWED_ORIGINS = ['http://localhost:5173']
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -118,8 +122,8 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+# MEDIA_URL = '/media/'
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field

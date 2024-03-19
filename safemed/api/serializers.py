@@ -12,6 +12,7 @@ class CategorySerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class SubCategorySerializer(serializers.ModelSerializer):
+    category = serializers.StringRelatedField()
     class Meta:
         model = SubCategory
         fields = '__all__'
@@ -22,10 +23,15 @@ class BrandSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class ProductSerializer(serializers.ModelSerializer):
+    category = serializers.StringRelatedField()
+    sub_category = serializers.StringRelatedField()
+    brand = serializers.StringRelatedField(source='brand.name')
+    image = serializers.StringRelatedField(source='image.name')
     class Meta:
         model = Product
-        fields = ('id', 'title', 'description', 'category', 'sub_category', 'brand', 'get_image', 'image')
         # image = serializers.Field('image.url')
+        fields = ('id', 'title', 'description', 'category', 'sub_category', 'brand', 'image_url', 'image')
+        #'get_image'
 
 class ContactsSerializer(serializers.ModelSerializer):
     class Meta:

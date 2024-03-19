@@ -6,10 +6,11 @@ from .models import Category, SubCategory, Brand, Product, Contacts
 
 
 class ProductAdmin(ImportExportModelAdmin):
-    list_display = ('id', 'title', 'category', 'sub_category', 'brand', 'description', 'image')
+    list_display = ('id', 'title', 'category', 'sub_category', 'brand', 'description', 'image')  # Заменил 'subcategory' на 'sub_category'
     search_fields = ('id', 'title', 'category__title', 'sub_category__title', 'brand__name')
     list_filter = ('category', 'sub_category', 'brand')
     resource_class = ProductResource
+    
 
 class BrandAdmin(ImportExportModelAdmin):
     resource_class = BrandResource
@@ -18,6 +19,8 @@ class CategoryAdmin(ImportExportModelAdmin):
     resource_class = CategoryResource
 
 class SubCategoryAdmin(ImportExportModelAdmin):
+    list_display = ('id', 'title', 'category')
+    search_fields = ('id', 'title', 'category__title')
     resource_class = SubCategoryResource
     
 admin.site.register(Product, ProductAdmin)
